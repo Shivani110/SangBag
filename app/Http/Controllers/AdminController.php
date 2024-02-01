@@ -9,6 +9,8 @@ use App\Models\Style;
 use App\Models\Product;
 use App\Models\Media;
 use App\Models\Brand;
+use App\Models\Color;
+use App\Models\Material;
 
 class AdminController extends Controller
 {
@@ -151,11 +153,81 @@ class AdminController extends Controller
         return response()->json($brand);
     }
 
+    public function color(){
+        $color = Color::all();
+        return view('admin.color',compact('color'));
+    }
+
+    public function createcolor(Request $request){
+        if($request->id){
+            $request->validate([
+                'name' => 'required'
+            ]);
+            $color = Color::where('id','=',$request->id)->first();
+            $color->color_name = $request->name;
+            $color->update();
+            $status = "edit";
+        }else{
+            $request->validate([
+                'name' => 'required|unique:colors,color_name',
+            ]);
+
+            $color = new Color;
+            $color->color_name = $request->name;
+            $color->save();
+            $status = "save";
+        }
+
+        return response()->json([$color,$status]);
+    }
+
+    public function deletecolor(Request $request){
+        $id = $request->id;
+        $color = Color::where('id','=',$id)->delete();
+        return response()->json($color);
+    }
+
+    public function material(){
+        $material = Material::all();
+        return view('admin.material',compact('material'));
+    }
+
+    public function creatematerial(Request $request){
+        if($request->id){
+            $request->validate([
+                'name' => 'required'
+            ]);
+            $material = Material::where('id','=',$request->id)->first();
+            $material->name = $request->name;
+            $material->update();
+            $status = "edit";
+        }else{
+            $request->validate([
+                'name' => 'required|unique:materials,name',
+            ]);
+
+            $material = new Material;
+            $material->name = $request->name;
+            $material->save();
+            $status = "save";
+        }
+
+        return response()->json([$material,$status]);
+    }
+
+    public function deletematerial(Request $request){
+        $id = $request->id;
+        $material = Material::where('id','=',$id)->delete();
+
+        return response()->json($material);
+    }
+
     public function product(){
         $category = ProductCategory::all();
         $style = Style::all();
         $brand = Brand::all();
-        return view('admin.product',compact('category','style','brand'));
+        $color = Color::all();
+        return view('admin.product',compact('category','style','brand','color'));
     }
 
     public function createproduct(Request $request){

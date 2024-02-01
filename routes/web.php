@@ -36,6 +36,12 @@ Route::middleware(['Auth'=>'admin'])->group(function () {
     Route::get('/productbrand',[AdminController::class,'brand']);
     Route::post('/createbrand',[AdminController::class,'createbrand']);
     Route::post('/deletebrand',[AdminController::class,'deletebrands']);
+    Route::get('/productcolor',[AdminController::class,'color']);
+    Route::post('/createcolor',[AdminController::class,'createcolor']);
+    Route::post('/deletecolor',[AdminController::class,'deletecolor']);
+    Route::get('/productmaterial',[AdminController::class,'material']);
+    Route::post('/creatematerial',[AdminController::class,'creatematerial']);
+    Route::post('/deletematerial',[AdminController::class,'deletematerial']);
     Route::get('/product',[AdminController::class,'product']);
     Route::post('/createproduct',[AdminController::class,'createproduct']);
     Route::get('/allproducts',[AdminController::class,'allproducts']);

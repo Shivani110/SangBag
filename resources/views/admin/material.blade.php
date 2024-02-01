@@ -10,7 +10,7 @@
                     <div class="nk-block nk-block-lg">
                         <div class="nk-block-head">
                             <div class="nk-block-head-content">
-                                <h4 class="title nk-block-title">Product Color</h4>
+                                <h4 class="title nk-block-title">Product Material</h4>
                             </div>
                         </div>
                         <div class="card card-bordered card-preview">
@@ -20,12 +20,12 @@
                                         <div class="row gy-4">
                                             <div class="col-lg-8">
                                                 <div class="form-group">
-                                                    <label class="form-label" for="name">Color Name</label>
+                                                    <label class="form-label" for="name">Material Name</label>
                                                     <div class="form-control-wrap">
                                                         <input type="text" class="form-control" id="name" name="name" value="">
                                                     </div>
                                                 </div>
-                                                <input type="hidden" id="clr_id" name="clr_id" value=""> 
+                                                <input type="hidden" id="m_id" name="m_id" value=""> 
                                                 <input type="submit" name="submit" value="Save" class="btn btn-primary">
                                                 <br>
                                             </div>
@@ -40,7 +40,7 @@
                                         <th class="tb-tnx-id"><span class="">#</span></th>
                                         <th class="tb-tnx-info">
                                             <span class="tb-tnx-desc d-none d-sm-inline-block">
-                                                <span>Color Name</span>
+                                                <span>Material Name</span>
                                             </span>
                                         </th>
                                         <th class="tb-tnx-action">
@@ -50,22 +50,22 @@
                                 </thead>
                                 <tbody>  
                                     <?php $i=1; ?>
-                                    @if($color ?? '')
-                                        @foreach($color as $data)
-                                            <tr class="tb-tnx-item" id="color{{ $data->id }}">
+                                    @if($material ?? '')
+                                        @foreach($material as $data)
+                                            <tr class="tb-tnx-item" id="material{{ $data->id }}">
                                                 <td class="tb-tnx-id">
                                                     <a href="#"><span>{{ $i++ }}</span></a>
                                                 </td>
-                                                <td class="tb-tnx-info clrname{{ $data->id }}">
+                                                <td class="tb-tnx-info mname{{ $data->id }}">
                                                     <div class="tb-tnx-desc">
-                                                        <input type="text" data-id="{{ $data->id }}" id="clname" class="" value="{{ $data->color_name }}" disabled="" style="border: none; background: transparent;">
+                                                        <input type="text" data-id="{{ $data->id }}" id="mname" class="" value="{{ $data->name }}" disabled="" style="border: none; background: transparent;">
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="dropdown drop"><a class="text-soft=" dropdown-toggle="" btn="" btn-icon="" btn-trigger="" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em>
                                                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                                             <ul class="link-list-plain">
-                                                                <li><a data-id="{{ $data->id }}" data-name="{{ $data->color_name }}" class="edit-category">Edit</a></li>
+                                                                <li><a data-id="{{ $data->id }}" data-name="{{ $data->name }}" class="edit-category">Edit</a></li>
                                                                 <li><a data-id="{{ $data->id }}" class="remove-category">Remove</a></li>
                                                             </ul>
                                                         </div>
@@ -90,12 +90,12 @@
         $('#myform').submit(function(e){
             e.preventDefault();
             var data={
-                id: $('#clr_id').val(),
+                id: $('#m_id').val(),
                 name: $('#name').val(),
                 _token:"{{ csrf_token() }}",
             }
             $.ajax({
-                url: "{{ url('createcolor') }}",
+                url: "{{ url('creatematerial') }}",
                 type: "POST",
                 data: data,
                 dataType: "JSON",
@@ -103,23 +103,23 @@
                     $('#myform')[0].reset();
 
                     if(response[1] == 'edit'){
-                        var html = '<input type="text" data-id="'+response[0].id+'" id="clname" class="" value="'+response[0].color_name+'" disabled="" style="border: none; background: transparent;">';
-                        $('.clrname'+response[0].id).html(html);
-                        var targetDiv = $("#color"+response[0].id);
+                        var html = '<input type="text" data-id="'+response[0].id+'" id="mname" class="" value="'+response[0].color_name+'" disabled="" style="border: none; background: transparent;">';
+                        $('.mname'+response[0].id).html(html);
+                        var targetDiv = $("#material"+response[0].id);
                         $('html, body').animate({
                             scrollTop: targetDiv.offset().top
                         }, 0);
 
-                        $('#clr_id').val('');
+                        $('#m_id').val('');
                         $('#name').val('');
                     }
 
                     if(response[1] == 'save'){
-                        var row = $('<tr class="tb-tnx-item" id="color'+response[0].id+'"><td class="tb-tnx-id"><a href="#"><span>'+ i +'</span></a></td><td class="tb-tnx-info clrname'+response[0].id+'"><div class="tb-tnx-desc"><input type="text" data-id="'+response[0].id+'" id="clname" class="" value="'+response[0].color_name+'" disabled="" style="border: none; background: transparent;"></div></td><td><div class="dropdown drop"><a class="text-soft=" dropdown-toggle="" btn="" btn-icon="" btn-trigger="" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em><div class="dropdown-menu dropdown-menu-end dropdown-menu-xs"><ul class="link-list-plain"><li><a data-id="'+response[0].id+'" data-name="'+response[0].color_name+'" class="edit-category">Edit</a></li><li><a data-id="'+response[0].id+'" class="remove-category">Remove</a></li></ul></div></div></td></tr>');
+                        var row = $('<tr class="tb-tnx-item" id="material'+response[0].id+'"><td class="tb-tnx-id"><a href="#"><span>'+ i +'</span></a></td><td class="tb-tnx-info mname'+response[0].id+'"><div class="tb-tnx-desc"><input type="text" data-id="'+response[0].id+'" id="mname" class="" value="'+response[0].name+'" disabled="" style="border: none; background: transparent;"></div></td><td><div class="dropdown drop"><a class="text-soft=" dropdown-toggle="" btn="" btn-icon="" btn-trigger="" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em><div class="dropdown-menu dropdown-menu-end dropdown-menu-xs"><ul class="link-list-plain"><li><a data-id="'+response[0].id+'" data-name="'+response[0].name+'" class="edit-category">Edit</a></li><li><a data-id="'+response[0].id+'" class="remove-category">Remove</a></li></ul></div></div></td></tr>');
                         $('tbody').append(row);
                         i = i+1;
 
-                        var targetDiv = $("#color"+response[0].id);
+                        var targetDiv = $("#material"+response[0].id);
                         $('html, body').animate({
                             scrollTop: targetDiv.offset().top
                         }, 0);
@@ -138,13 +138,13 @@
         var name = $(this).attr('data-name');
         var id = $(this).attr('data-id');
 
-        var cname = $('#name').val(name);
-        var cid = $('#clr_id').val(id);
+        var mname = $('#name').val(name);
+        var mid = $('#m_id').val(id);
     });
 
     $('.remove-category').click(function(){
         $('#name').val('');
-        $('#clr_id').val('');
+        $('#m_id').val('');
 
         var id = $(this).attr('data-id');
         var data={
@@ -152,7 +152,7 @@
             _token: "{{ csrf_token() }}",
         }
         $.ajax({
-            url:"{{ url('deletecolor') }}",
+            url:"{{ url('deletematerial') }}",
             type: "POST",
             data: data,
             dataType: "JSON",
@@ -160,7 +160,7 @@
                 if(response){
                     NioApp.Toast('Deleted..','error',{position:'top-right'});
                     id = data.id;
-                    $('#color'+id).html('');
+                    $('#material'+id).html('');
                 }
             }
         });

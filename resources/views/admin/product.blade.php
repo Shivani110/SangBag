@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <div class="nk-content">
     <div class="nk-block nk-block-lg">
         <div class="card card-bordered">
@@ -140,6 +139,33 @@
                                     </select>
                             
                                     @error('brand')
+                                    {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label" for="color">Color</label>
+                                <div class="form-control-wrap">
+                                    <select class="form-select" id="color" name="color">
+                                        <option value="">Select</option>
+                                        @if($product->color ?? '')
+                                            @foreach($color as $clr)
+                                                @if($clr->id == $product->color)
+                                                    <option selected value="{{ $clr->id }}">{{ $clr->color_name }}</option>
+                                                @else
+                                                    <option value="{{ $clr->id }}">{{ $clr->color_name }}</option>
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            @foreach($color as $clr)
+                                                <option value="{{ $clr->id }}">{{ $clr->color_name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                            
+                                    @error('color')
                                     {{ $message }}
                                     @enderror
                                 </div>
