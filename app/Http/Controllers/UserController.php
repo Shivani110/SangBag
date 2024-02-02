@@ -9,21 +9,14 @@ use Hash;
 
 class UserController extends Controller
 {
-    public function login(){
-        return view('frontend.login');
-    }
-
-    public function register(){
-        return view('frontend.applynow');
-    }
-
-    public function applynow(Request $request){
+    public function adminsignin(Request $request){
+        $email = $request->email;
         $password = $request->password;
 
-        if(Auth::attempt(['email' => 'admin@gmail.com','password' => $password])){
+        if(Auth::attempt(['email' => $email,'password' => $password])){
             $role = Auth::user()->user_type;
             if($role == '1'){
-                return redirect('index');
+                return redirect('adminindex');
             }else{
                 Auth::logout();
                 return back()->with("error","login falied !!");
@@ -35,6 +28,6 @@ class UserController extends Controller
 
     public function logout(){
         Auth::logout();
-        return redirect('/login');
+        return redirect('/admin-login');
     }
 }

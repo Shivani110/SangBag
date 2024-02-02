@@ -16,9 +16,9 @@ $(document).ready(function(){
                 dots: false,
                 infinite: true,
                 prevArrow:
-                '<button class="slide-arrow prev-arrow"> <img src="img/left_2.svg" ></button>',
+                '<button class="slide-arrow prev-arrow"> <img src="asset/img/left_2.svg" ></button>',
                 nextArrow:
-                '<button class="slide-arrow next-arrow"> <img src="img/right_1.svg" ></button>',
+                '<button class="slide-arrow next-arrow"> <img src="asset/img/right_1.svg" ></button>',
                 responsive: [
                 {
                     breakpoint: 1200,
@@ -93,8 +93,8 @@ $(document).ready(function(){
         arrow: true,
         speed: 400,
         dots: false,
-        prevArrow: '<button class="slide-arrow prev-arrow"> <img src="img/left_2.svg" ></button>',
-        nextArrow: '<button class="slide-arrow next-arrow"> <img src="img/right_1.svg" ></button>',
+        prevArrow: '<button class="slide-arrow prev-arrow"> <img src="asset/img/left_2.svg" ></button>',
+        nextArrow: '<button class="slide-arrow next-arrow"> <img src="asset/img/right_1.svg" ></button>',
         responsive: [
         {
             breakpoint: 1200,

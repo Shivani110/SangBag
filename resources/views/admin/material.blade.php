@@ -103,7 +103,7 @@
                     $('#myform')[0].reset();
 
                     if(response[1] == 'edit'){
-                        var html = '<input type="text" data-id="'+response[0].id+'" id="mname" class="" value="'+response[0].color_name+'" disabled="" style="border: none; background: transparent;">';
+                        var html = '<input type="text" data-id="'+response[0].id+'" id="mname" class="" value="'+response[0].name+'" disabled="" style="border: none; background: transparent;">';
                         $('.mname'+response[0].id).html(html);
                         var targetDiv = $("#material"+response[0].id);
                         $('html, body').animate({

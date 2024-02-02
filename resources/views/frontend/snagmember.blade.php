@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('asset/fonts/fonts.css') }}">
 
-    <title>login page</title>
+    <title>Welcome to become Snag Member! page</title>
 </head>
 <body>
     <header class="hearder_wrapper hearder_inner">
@@ -61,43 +61,70 @@
         </nav>
     </header>
 
-    <section class="login_wrapper p_120">
+    <section class="snag_member_wrapper p_120">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="img" data-aos="fade-right" data-aos-duration="3000">
-                        <img src="{{ asset('asset/img/login_img.svg') }}">
+                <div class="snag_member_contact">
+                    <div data-aos="zoom-in" data-aos-duration="3000">
+                        <img src="{{ asset('asset/img/check_icon.png') }}">
+                    </div>
+                    <div data-aos="fade-up" data-aos-duration="3000">
+                        <h2>Welcome to become Snag Member!</h2>
+                        <p>
+                            You should recevie an order confirmation email shortly. 
+                        </p>
+                        <a href="#" class="btn cta">Back To Home</a>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="form-ryt-content" data-aos="fade-left" data-aos-duration="3000">
-                        <form method="post" action="">
-                            <div class="form-heading">
-                                <h2>Log In</h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="snag_wrapper email_wrap bg_img" style="background-image: url({{ asset('asset/img/snag_bg_4.png') }});">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="snag_content text-white" data-aos="flip-down" data-aos-duration="3000">
+                        <h2 class="text-white">Join our mailing list to stay up to date on the latest trends and new arrivals.</h2>
+                        <div class="email_wreap">
+                            <input type="email" class="form-control" placeholder="Your Email">
+                            <img src="{{ asset('asset/img/right_arrow.png') }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="insta_wrapper p_120" data-aos="fade-up" data-aos-duration="3000">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="insta_content text-white">
+                        <h2>@snag_my_bag</h2>
+                        <div class="insta_slider">
+                            <div>
+                                <img src="{{ asset('asset/img/insta_view_1.png') }}">
                             </div>
-                            <div class="form-groups">
-                                <input type="text" class="form-control" id="username" name="username" aria-describedby="userHelp" placeholder="Email Address" required>
+                            <div>
+                                <img src="{{ asset('asset/img/insta_view_2.png') }}">
                             </div>
-                            <div class="form-groups">
-                                <div class="input-group forget_pw" id="show_hide_password">
-                                    <input class="form-control" type="password" name="password" placeholder="Password" required>
-                                    <div class="input-group-addon">
-                                        <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-                                    </div>
-                                </div>
+                            <div>
+                                <img src="{{ asset('asset/img/insta_view_3.png') }}">
                             </div>
-                            <div class="form-text1 d-flex">
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Remember me</label>
-                                </div>
-                                <a href="#">Forget Password?</a>
+                            <div>
+                                <img src="{{ asset('asset/img/insta_view_4.png') }}">
                             </div>
-                            <div class="form-text2 d-flex">
-                                <button type="submit" class="btn cta" name="submit">Submit</button>
-                                <p>Not a member? <a href="{{ url('applynow') }}">Apply now.</a></p>
+                            <div>
+                                <img src="{{ asset('asset/img/insta_view_5.png') }}">
                             </div>
-                        </form>
+                            <div>
+                                <img src="{{ asset('asset/img/insta_view_6.png') }}">
+                            </div>
+                        </div>
+                        <div class="text-center" data-aos="zoom-in" data-aos-duration="3000">
+                            <a href="#" class="btn cta btn_dark"><i class="fa-brands fa-instagram"></i> View On Instgram</a>
+                        </div>
                     </div>
                 </div>
             </div>

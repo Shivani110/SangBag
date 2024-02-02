@@ -20,10 +20,10 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('asset/fonts/fonts.css') }}">
 
-    <title>login page</title>
+    <title>Contact Us page</title>
 </head>
 <body>
-    <header class="hearder_wrapper hearder_inner">
+    <header class="hearder_wrapper">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid p-0">
                 <a class="navbar-brand" href="#">
@@ -61,43 +61,141 @@
         </nav>
     </header>
 
-    <section class="login_wrapper p_120">
+    <section class="banner_inner" style="background-image: url({{ asset('asset/img/banner_inner_5.png') }});">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="img" data-aos="fade-right" data-aos-duration="3000">
-                        <img src="{{ asset('asset/img/login_img.svg') }}">
+                <div class="col-lg-12 position-relative">
+                    <div class="banner_content" data-aos="fade-up" data-aos-duration="3000">
+                        <h1>Contact Us</h1>
+                        <div class="breadcrumb_wreap">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                                </ol>
+                            </nav>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="form-ryt-content" data-aos="fade-left" data-aos-duration="3000">
-                        <form method="post" action="">
-                            <div class="form-heading">
-                                <h2>Log In</h2>
-                            </div>
-                            <div class="form-groups">
-                                <input type="text" class="form-control" id="username" name="username" aria-describedby="userHelp" placeholder="Email Address" required>
-                            </div>
-                            <div class="form-groups">
-                                <div class="input-group forget_pw" id="show_hide_password">
-                                    <input class="form-control" type="password" name="password" placeholder="Password" required>
-                                    <div class="input-group-addon">
-                                        <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact_sec p_120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="3000">
+                    <div class="blogs_content">
+                        <span>gET IN TOUCH</span>
+                    </div>
+                    <div class="contact-lft-info">
+                        <div class="text-left hd-txt">
+                            <h2>Contact Us</h2>
+                            <p>Question? Problem? Request? You can always check our FAQ or send us a message here.</p>
+                        </div>
+                        <div class="contact-social-icon">
+                            <ul class="list-unstyled m-0">
+                                <li>
+                                    <div class="contact-icons">
+                                        <img src="{{ asset('asset/img/ph_phone-call.png') }}" class="img-fluid" alt="...">
                                     </div>
-                                </div>
+                                    <div class="cnt-txt"><strong>Call Us</strong> <a href="tel:0 123 4567 890" class="small-text">0 123 4567 890</a></div>
+                                </li>
+
+                                <li>
+                                    <div class="contact-icons">
+                                        <img src="{{ asset('asset/img/clarity_email-line.png') }}" class="img-fluid" alt="...">
+                                    </div>
+                                    <div class="cnt-txt"><strong>Email</strong> <a href="mailto:contact@snagmybag.com" class="small-text">contact@snagmybag.com</a></div>
+                                </li>
+                                <li>
+                                    <div class="contact-icons">
+                                        <img src="{{ asset('asset/img/loction.png') }}" class="img-fluid" alt="...">
+                                    </div>
+                                    <div class="cnt-txt"><strong>Location</strong> <span class="small-text">8975 W Charleston Blvd. Suite 190 Las Vegas, NV 89117</span></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="3000">
+                    <div>
+                        <h4>Get A Quote</h4>
+                    </div>
+                    <form>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="usr" name="username" placeholder=" First Name *">
                             </div>
-                            <div class="form-text1 d-flex">
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Remember me</label>
-                                </div>
-                                <a href="#">Forget Password?</a>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="usr" name="username" placeholder="Last Name *">
                             </div>
-                            <div class="form-text2 d-flex">
-                                <button type="submit" class="btn cta" name="submit">Submit</button>
-                                <p>Not a member? <a href="{{ url('applynow') }}">Apply now.</a></p>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number *" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required="">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email *">
+                        </div>
+
+                        <div class="form-group">
+                            <textarea class="form-control" rows="4" id="comment" name="text" placeholder="How can we help?"></textarea>
+                        </div>
+                        <div class="s-buttn">
+                            <a href="#" class="btn cta">Contact Us</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="snag_wrapper email_wrap bg_img" style="background-image: url({{ asset('asset/img/snag_bg_4.png') }});">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="snag_content text-white" data-aos="flip-down" data-aos-duration="3000">
+                        <h2 class="text-white">Join our mailing list to stay up to date on the latest trends and new arrivals.</h2>
+                        <div class="email_wreap">
+                            <input type="email" class="form-control" placeholder="Your Email">
+                            <img src="{{ asset('asset/img/right_arrow.png') }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="insta_wrapper p_120" data-aos="fade-up" data-aos-duration="3000">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="insta_content text-white">
+                        <h2>@snag_my_bag</h2>
+                        <div class="insta_slider">
+                            <div>
+                                <img src="{{ asset('asset/img/insta_view_1.png') }}">
                             </div>
-                        </form>
+                            <div>
+                                <img src="{{ asset('asset/img/insta_view_2.png') }}">
+                            </div>
+                            <div>
+                                <img src="{{ asset('asset/img/insta_view_3.png') }}">
+                            </div>
+                            <div>
+                                <img src="{{ asset('asset/img/insta_view_4.png') }}">
+                            </div>
+                            <div>
+                                <img src="{{ asset('asset/img/insta_view_5.png') }}">
+                            </div>
+                            <div>
+                                <img src="{{ asset('asset/img/insta_view_6.png') }}">
+                            </div>
+                        </div>
+                        <div class="text-center" data-aos="zoom-in" data-aos-duration="3000">
+                            <a href="#" class="btn cta btn_dark"><i class="fa-brands fa-instagram"></i> View On Instgram</a>
+                        </div>
                     </div>
                 </div>
             </div>

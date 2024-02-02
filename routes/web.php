@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FrontController;
 
 
 /*
@@ -20,13 +21,23 @@ use App\Http\Controllers\AdminController;
 //     return view('welcome');
 // });
 
-Route::get('/login',[UserController::class,'login']);
-Route::get('/applynow',[UserController::class,'register']);
-Route::post('/register',[UserController::class,'applynow']);
+Route::get('/admin-login',[FrontController::class,'adminlogin']);
+Route::get('/',[FrontController::class,'index']);
+Route::get('/login',[FrontController::class,'login']);
+Route::get('/applynow',[FrontController::class,'applynow']);
+Route::get('/contact_us',[FrontController::class,'contactus']);
+Route::get('/blog_details',[FrontController::class,'blogdetails']);
+Route::get('/blogs',[FrontController::class,'blogs']);
+Route::get('/thankyou',[FrontController::class,'thankyou']);
+Route::get('/snag-member',[FrontController::class,'snagmember']);
+Route::get('/privacy-policy',[FrontController::class,'privacypolicy']);
+Route::get('/productpage',[FrontController::class,'products']);
+
+Route::post('/signin',[UserController::class,'adminsignin']);
 Route::get('/logout',[UserController::class,'logout']);
 
 Route::middleware(['Auth'=>'admin'])->group(function () {
-    Route::get('/index',[AdminController::class,'index']);
+    Route::get('/adminindex',[AdminController::class,'index']);
     Route::get('/productcategory',[AdminController::class,'category']);
     Route::post('/createcategory',[AdminController::class,'createcategory']);
     Route::post('/deletecategory',[AdminController::class,'deleteCategory']);
@@ -48,4 +59,5 @@ Route::middleware(['Auth'=>'admin'])->group(function () {
     Route::get('/product/{slug}',[AdminController::class,'editproduct']);
     Route::post('/updateproduct',[AdminController::class,'updateproduct']);
     Route::post('/deleteproduct',[AdminController::class,'deleteProduct']);
+    Route::post('/deleteimage',[AdminController::class,'deletegalleryImage']);
 });

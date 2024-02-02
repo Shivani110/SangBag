@@ -227,7 +227,8 @@ class AdminController extends Controller
         $style = Style::all();
         $brand = Brand::all();
         $color = Color::all();
-        return view('admin.product',compact('category','style','brand','color'));
+        $material = Material::all();
+        return view('admin.product',compact('category','style','brand','color','material'));
     }
 
     public function createproduct(Request $request){
@@ -236,6 +237,9 @@ class AdminController extends Controller
             'pslug' => 'required|unique:products,product_slug',
             'category' => 'required',
             'style' => 'required',
+            'brand' => 'required',
+            'color' => 'required',
+            'material' => 'required',
             'image' => 'required',
             'gimage' => 'required',
             'price' => 'required',
@@ -255,6 +259,9 @@ class AdminController extends Controller
         $product->category = $request->category;
         $product->style = $request->style;
         $product->product_image = $imagename;
+        $product->brand = $request->brand;
+        $product->color = $request->color;
+        $product->material = $request->material;
         $product->price = $request->price;
         $product->description = $request->description;
         $product->save();
@@ -285,11 +292,13 @@ class AdminController extends Controller
     }
 
     public function editproduct($slug){
-        $product = Product::where('product_slug','=',$slug)->first();
+        $product = Product::where('product_slug','=',$slug)->with('media')->first();
         $category = ProductCategory::all();
         $style = Style::all();
         $brand = Brand::all();
-        return view('admin.product',compact('product','category','style','brand'));
+        $color = Color::all();
+        $material = Material::all();
+        return view('admin.product',compact('product','category','style','brand','color','material'));
     }
 
     public function updateproduct(Request $request){
@@ -311,15 +320,62 @@ class AdminController extends Controller
         $productS->category = $request->category;
         $productS->style = $request->style;
         $productS->product_image = $imagename;
+        $productS->brand = $request->brand;
+        $productS->color = $request->color;
+        $productS->material = $request->material;
         $productS->price = $request->price;
         $productS->description = $request->description;    
         $productS->update();
         
+        $files = [];
+        if($request->gimage != null){
+            $media = Media::where('product_id','=',$id)->first();
+            if($media != null){
+                if($request->hasFile('gimage')){
+                    for($i=0;$i<count($request->file('gimage'));$i++){
+                        $file = $request->file('gimage')[$i];
+                        $name = time().rand(1,50).'.'.$file->extension();
+                        $file->move(public_path('images'), $name); 
+                        $path = asset('images/'.$name);
+                        $files = $name;
+    
+                        $media = new Media();
+                        $media->image_name = $files;
+                        $media->image_path = $path;
+                        $media->update();
+                    }
+                }
+            }else{
+                if($request->hasFile('gimage')){
+                    for($i=0;$i<count($request->file('gimage'));$i++){
+                        $file = $request->file('gimage')[$i];
+                        $name = time().rand(1,50).'.'.$file->extension();
+                        $file->move(public_path('images'), $name); 
+                        $path = asset('images/'.$name);
+                        $files = $name;
+        
+                        $medias = new Media;
+                        $medias->image_name = $files;
+                        $medias->image_path = $path;
+                        $medias->product_id = $id;
+                        $medias->save();
+                    }
+                }
+            }
+        }
+
         return back()->with('success','Products successfully updated..');
     }
 
     public function deleteProduct(Request $request){
         $product = Product::where('id','=',$request->id)->delete();
         return response()->json($product);
+    }
+
+    public function deletegalleryImage(Request $request){
+        $id = $request->id;
+        $media = Media::where('id','=',$id)->delete();
+
+        return response()->json($media);
     }
 }

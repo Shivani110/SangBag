@@ -110,8 +110,15 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label" for="gimage">Gallery Image</label>
+                                @if($product->media ?? '')
+                                    @foreach($product->media as $image)
+                                    <div id="media_img{{ $image->id }}">
+                                        <img src="{{ asset('/images/'.$image->image_name) }}" alt="">
+                                        <button type="button" class="btn btn-danger" onclick="removeImage({{$image->id}})">Remove</button>
+                                    </div>
+                                    @endforeach
+                                @endif
                                 <input type="file" name="gimage[]" id="gimage" class="form-control" value="" multiple>
-
                                 @error('gimage')
                                 {{ $message }}
                                 @enderror
@@ -137,7 +144,6 @@
                                             @endforeach
                                         @endif
                                     </select>
-                            
                                     @error('brand')
                                     {{ $message }}
                                     @enderror
@@ -166,6 +172,33 @@
                                     </select>
                             
                                     @error('color')
+                                    {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label" for="material">Material</label>
+                                <div class="form-control-wrap">
+                                    <select class="form-select" id="material" name="material">
+                                        <option value="">Select</option>
+                                        @if($product->material ?? '')
+                                            @foreach($material as $mat)
+                                                @if($mat->id == $product->material)
+                                                    <option selected value="{{ $mat->id }}">{{ $mat->name }}</option>
+                                                @else
+                                                    <option value="{{ $mat->id }}">{{ $mat->name }}</option>
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            @foreach($material as $mat)
+                                                <option value="{{ $mat->id }}">{{ $mat->name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                            
+                                    @error('material')
                                     {{ $message }}
                                     @enderror
                                 </div>
@@ -205,6 +238,24 @@
         const url = pname.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
         const slug = $('#pslug').val(url);
     });
+
+    function removeImage(id){
+        var data={
+            id:id,
+            _token:"{{ csrf_token() }}",
+        }
+        $.ajax({
+            url: "{{ url('deleteimage') }}",
+            data: data,
+            type: "post",
+            dataType: "JSON",
+            success: function(response){
+                if(response){
+                    $('#media_img'+data.id).remove();
+                }
+            }
+        });
+    }
 </script>
 
 @endsection

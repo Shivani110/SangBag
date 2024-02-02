@@ -22,6 +22,9 @@
                                         <div class="nk-tb-col tb-col-sm"><span>Product</span></div>
                                         <div class="nk-tb-col tb-col-sm"><span>Category</span></div>
                                         <div class="nk-tb-col tb-col-sm"><span>Style</span></div>
+                                        <div class="nk-tb-col tb-col-sm"><span>Brand</span></div>
+                                        <div class="nk-tb-col tb-col-sm"><span>Color</span></div>
+                                        <div class="nk-tb-col tb-col-sm"><span>Material</span></div>
                                         <div class="nk-tb-col tb-col-sm"><span>Price</span></div>
                                         <div class="nk-tb-col nk-tb-col-tools">
                                             <ul class="nk-tb-actions gx-1 my-n1">
@@ -55,6 +58,39 @@
                                                         $sid = $data->style;
                                                         $style = (App\Models\Style::where('id','=',$sid)->first());
                                                         print_r($style->name);
+                                                    }
+                                                ?>
+                                            </span>
+                                        </div>
+                                        <div class="nk-tb-col">
+                                            <span class="tb-lead">
+                                                <?php
+                                                    if($data->brand ?? ''){
+                                                        $bid = $data->brand;
+                                                        $brand = (App\Models\Brand::where('id','=',$bid)->first());
+                                                        print_r($brand->brand_name);
+                                                    }
+                                                ?>
+                                            </span>
+                                        </div>
+                                        <div class="nk-tb-col">
+                                            <span class="tb-lead">
+                                                <?php
+                                                    if($data->color ?? ''){
+                                                        $clr_id = $data->color;
+                                                        $color = (App\Models\Color::where('id','=',$clr_id)->first());
+                                                        print_r($color->color_name);
+                                                    }
+                                                ?>
+                                            </span>
+                                        </div>
+                                        <div class="nk-tb-col">
+                                            <span class="tb-lead">
+                                                <?php
+                                                    if($data->material ?? ''){
+                                                        $mid = $data->material;
+                                                        $material = (App\Models\Material::where('id','=',$mid)->first());
+                                                        print_r($material->name);
                                                     }
                                                 ?>
                                             </span>
